@@ -10,7 +10,7 @@ class GameQuestion < ActiveRecord::Base
   delegate :text, :level, to: :question, allow_nil: true
 
   validates :game, :question, presence: true
-  validates :a, :b, :c, :d, inclusion: {in: 1..4}
+  validates :a, :b, :c, :d, inclusion: { in: 1..4 }
 
   serialize :help_hash, Hash
 
@@ -28,7 +28,8 @@ class GameQuestion < ActiveRecord::Base
   end
 
   def correct_answer_key
-    {a => 'a', b => 'b', c => 'c', d => 'd'}[1]
+    { a => 'a', b => 'b', c => 'c', d => 'd' }[1]
+    binding.irb
   end
 
   def correct_answer
@@ -38,7 +39,7 @@ class GameQuestion < ActiveRecord::Base
   def add_fifty_fifty
     self.help_hash[:fifty_fifty] = [
       correct_answer_key,
-      (%w(a b c d) - [correct_answer_key]).sample
+      (%w[a b c d] - [correct_answer_key]).sample
     ]
 
     save

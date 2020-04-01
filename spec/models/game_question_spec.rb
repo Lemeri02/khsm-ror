@@ -33,6 +33,12 @@ RSpec.describe GameQuestion, type: :model do
       expect(game_question.text).to eq(game_question.question.text)
       expect(game_question.level).to eq(game_question.question.level)
     end
+
+    it 'correcr .correct_answer_key' do
+      game_question
+
+      binding.irb
+    end
   end
 
   # help_hash у нас имеет такой формат:
