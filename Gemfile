@@ -29,6 +29,7 @@ group :development, :test do
 
   # Гем, который позволяет смотреть, что видит capybara
   gem 'launchy'
+  gem 'pry'
 end
 
 group :production do

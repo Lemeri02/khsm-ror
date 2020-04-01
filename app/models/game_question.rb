@@ -29,7 +29,6 @@ class GameQuestion < ActiveRecord::Base
 
   def correct_answer_key
     { a => 'a', b => 'b', c => 'c', d => 'd' }[1]
-    binding.irb
   end
 
   def correct_answer
