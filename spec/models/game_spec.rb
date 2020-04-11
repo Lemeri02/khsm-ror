@@ -89,6 +89,21 @@ RSpec.describe Game, type: :model do
     end
   end
 
+  context '.current_game_question & .previous_level' do
+    let(:current_level) { game_w_questions.current_level }
+    let(:questions) { game_w_questions.game_questions }
+
+    it '.current_game_question' do
+      current_question = questions.detect { |q| q.question.level == current_level }
+
+      expect(game_w_questions.current_game_question).to eq(current_question)
+    end
+
+    it '.previous_livel' do
+      expect(game_w_questions.previous_level).to eq(current_level - 1)
+    end
+  end
+
     # группа тестов на проверку статуса игры
   context '.status' do
     # перед каждым тестом "завершаем игру"
