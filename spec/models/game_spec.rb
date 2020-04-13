@@ -127,6 +127,7 @@ RSpec.describe Game, type: :model do
       game_w_questions.created_at = 1.hour.ago
       game_w_questions.finished_at = Time.now
 
+      expect(game_w_questions.answer_current_question!('d')).to be_falsy
       expect(game_w_questions.finished?).to be_truthy
       expect(game_w_questions.time_out!).to be_truthy
     end
