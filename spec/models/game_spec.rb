@@ -90,17 +90,12 @@ RSpec.describe Game, type: :model do
   end
 
   context '.current_game_question & .previous_level' do
-    let(:current_level) { game_w_questions.current_level }
-    let(:questions) { game_w_questions.game_questions }
-
     it '.current_game_question' do
-      current_question = questions.detect { |q| q.question.level == current_level }
-
-      expect(game_w_questions.current_game_question).to eq(current_question)
+      expect(game_w_questions.current_game_question).to eq(game_w_questions.game_questions[0])
     end
 
     it '.previous_livel' do
-      expect(game_w_questions.previous_level).to eq(current_level - 1)
+      expect(game_w_questions.previous_level).to eq(-1)
     end
   end
 
