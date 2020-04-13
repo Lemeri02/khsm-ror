@@ -99,6 +99,39 @@ RSpec.describe Game, type: :model do
     end
   end
 
+  context '.answer_current_question!' do
+    it 'when answer is correct' do
+      expect(game_w_questions.answer_current_question!('d')).to be_truthy
+      expect(game_w_questions.current_level).to be(1)
+      expect(game_w_questions.save!).to be_truthy
+    end
+
+    it 'when answer is not correct' do
+      expect(game_w_questions.answer_current_question!('a')).to be_falsy
+      expect(game_w_questions.finished?).to be_truthy
+      expect(game_w_questions.status).to eq(:fail)
+    end
+
+    it 'when last answer (the million-rubles question)' do
+      game_w_questions.current_level = Question::QUESTION_LEVELS.max
+      game_w_questions.answer_current_question!('d')
+
+      expect(game_w_questions.finished?).to be_truthy
+      expect(game_w_questions.current_level).to eq(15)
+      expect(game_w_questions.prize).to eq(1_000_000)
+      expect(game_w_questions.status).to eq(:won)
+    end
+
+    it 'the answer was given after time is up' do
+      game_w_questions
+      game_w_questions.created_at = 1.hour.ago
+      game_w_questions.finished_at = Time.now
+
+      expect(game_w_questions.finished?).to be_truthy
+      expect(game_w_questions.time_out!).to be_truthy
+    end
+  end
+
     # группа тестов на проверку статуса игры
   context '.status' do
     # перед каждым тестом "завершаем игру"
