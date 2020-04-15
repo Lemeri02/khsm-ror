@@ -103,6 +103,7 @@ RSpec.describe Game, type: :model do
     it 'when answer is correct' do
       expect(game_w_questions.answer_current_question!('d')).to be true
       expect(game_w_questions.current_level).to be(1)
+      expect(game_w_questions.finished?).to be false
       expect(game_w_questions.status).to eq(:in_progress)
     end
 
