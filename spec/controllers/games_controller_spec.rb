@@ -129,6 +129,35 @@ RSpec.describe GamesController, type: :controller do
       expect(flash.empty?).to be_truthy # удачный ответ не заполняет flash
     end
 
+    it 'answers is wrong with no prize' do
+      put :answer, id: game_w_questions.id, letter: 'e'
+      game = assigns(:game)
+
+      expect(game.finished?).to be true
+      expect(game.prize).to eq(0)
+
+      user.reload
+      expect(user.balance).to eq(0)
+      expect(response).to redirect_to(user_path(user))
+      expect(flash[:alert]).to be
+    end
+
+    it 'answers is wrong with fireproof prize' do
+      game_w_questions.update_attribute(:current_level, 5)
+
+
+      put :answer, id: game_w_questions.id, letter: 'e'
+      game = assigns(:game)
+
+      expect(game.finished?).to be true
+      expect(game.prize).to eq(1_000)
+
+      user.reload
+      expect(user.balance).to eq(1_000)
+      expect(response).to redirect_to(user_path(user))
+      expect(flash[:alert]).to be
+    end
+
     # тест на отработку "помощи зала"
     it 'uses audience help' do
       # сперва проверяем что в подсказках текущего вопроса пусто
