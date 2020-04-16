@@ -145,7 +145,6 @@ RSpec.describe GamesController, type: :controller do
     it 'answers is wrong with fireproof prize' do
       game_w_questions.update_attribute(:current_level, 5)
 
-
       put :answer, id: game_w_questions.id, letter: 'e'
       game = assigns(:game)
 
