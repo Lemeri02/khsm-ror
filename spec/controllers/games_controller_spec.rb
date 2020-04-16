@@ -23,7 +23,10 @@ RSpec.describe GamesController, type: :controller do
     it 'kick from #show' do
       # вызываем экшен
       get :show, id: game_w_questions.id
+      game = assigns(:game)
+
       # проверяем ответ
+      expect(game).to be nil
       expect(response.status).not_to eq(200) # статус не 200 ОК
       expect(response).to redirect_to(new_user_session_path) # devise должен отправить на логин
       expect(flash[:alert]).to be # во flash должен быть прописана ошибка
@@ -33,6 +36,7 @@ RSpec.describe GamesController, type: :controller do
       post :create
       game = assigns(:game)
 
+      expect(game).to be nil
       expect(response.status).not_to eq(200)
       expect(response).to redirect_to(new_user_session_path)
       expect(flash[:alert]).to be
@@ -42,6 +46,7 @@ RSpec.describe GamesController, type: :controller do
       put :answer, id: game_w_questions.id, letter: game_w_questions.current_game_question.correct_answer_key
       game = assigns(:game)
 
+      expect(game).to be nil
       expect(response.status).not_to eq(200)
       expect(response).to redirect_to(new_user_session_path)
       expect(flash[:alert]).to be
@@ -51,6 +56,7 @@ RSpec.describe GamesController, type: :controller do
       put :take_money, id: game_w_questions.id
       game = assigns(:game)
 
+      expect(game).to be nil
       expect(response.status).not_to eq(200)
       expect(response).to redirect_to(new_user_session_path)
       expect(flash[:alert]).to be
@@ -60,6 +66,7 @@ RSpec.describe GamesController, type: :controller do
       put :help, id: game_w_questions.id, help_type: :audience_help
       game = assigns(:game)
 
+      expect(game).to be nil
       expect(response.status).not_to eq(200)
       expect(response).to redirect_to(new_user_session_path)
       expect(flash[:alert]).to be
