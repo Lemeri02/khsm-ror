@@ -19,6 +19,8 @@ RSpec.describe 'users/index', type: :view do
   it 'renders player names' do
     expect(rendered).to match 'Вадик'
     expect(rendered).to match 'Миша'
+    
+    byebug
   end
 
   # Проверяем, что шаблон выводит балансы игроков
