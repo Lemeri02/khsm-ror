@@ -32,6 +32,7 @@ RSpec.feature 'USER visits another user profile', type: :feature do
     expect(page).to have_content 'Вопрос'
     expect(page).to have_content 'Выигрыш'
     expect(page).to have_content 'Подсказки'
+    expect(page).not_to have_content 'Сменить имя и пароль'
 
     expect(page).to have_content users.first.name
     expect(page).to have_content users.last.name
