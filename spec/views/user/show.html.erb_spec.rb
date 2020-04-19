@@ -2,12 +2,12 @@ require 'rails_helper'
 
 RSpec.describe 'users/show', type: :view do
   before(:each) do
-    assign(:user, FactoryGirl.create(:user))
+    assign(:user, FactoryBot.create(:user))
 
     assign(:games, [
-      FactoryGirl.build_stubbed(:game, id: 97, created_at: Time.parse('2020.04.25, 00:00'), current_level: 05, prize: 1000),
-      FactoryGirl.build_stubbed(:game, id: 98, created_at: Time.parse('2020.04.26, 01:00'), current_level: 10, prize: 32000),
-      FactoryGirl.build_stubbed(:game, id: 99, created_at: Time.parse('2020.04.27, 02:00'), current_level: 07, prize: 5000),
+      FactoryBot.build_stubbed(:game, id: 97, created_at: Time.parse('2020.04.25, 00:00'), current_level: 05, prize: 1000),
+      FactoryBot.build_stubbed(:game, id: 98, created_at: Time.parse('2020.04.26, 01:00'), current_level: 10, prize: 32000),
+      FactoryBot.build_stubbed(:game, id: 99, created_at: Time.parse('2020.04.27, 02:00'), current_level: 07, prize: 5000),
     ])
 
     render
@@ -30,7 +30,7 @@ RSpec.describe 'users/show', type: :view do
   end
 
   context 'for current user' do
-    let(:user) { FactoryGirl.create(:user) }
+    let(:user) { FactoryBot.create(:user) }
 
     before(:each) do
       assign(:user, user)
